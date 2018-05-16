@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Background</title>
+<style type="text/css">
+/*设置背景图*/
+body {
+	background-image: url("x/background.jpeg");
+}
+
+div {
+	border: 1px solid black;
+	width: 100px;
+	height: 100px;
+	margin: 20px auto;
+}
+
+/*采用简洁方式设置背景
+	若不希望图片变形则可以使用background-size的center属性使图片居中*/
+.enemy {
+	background: url("x/enemy.jpg");
+	background-size: 100px 100px;
+}
+
+.hero {
+	background: url("x/hero.jpg");
+	background-size: 100px 100px;
+}
+
+/*设置背景图案固定*/
+body {
+	background-attachment: fixed;
+}
+</style>
+</head>
+<body>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="enemy"></div>
+	<div class="hero"></div>
+	<div class="hero"></div>
+</body>
+</html>

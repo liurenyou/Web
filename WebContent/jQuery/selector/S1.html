@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>基本选择器</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.id选择器执行速度最快
+	function f1() {
+		$("#d1").css("font-size", "60px");
+	}
+	//2.类选择器
+	function f2() {
+		$(".c1").css("font-size", "80px");
+	}
+	//3.元素选择器
+	function f3() {
+		$("div").css("font-size", "80px");
+	}
+	//4.组合选择器
+	function f4() {
+		$("#d1,p").css("font-size", "80px");
+	}
+	//5.所有元素
+	function f5() {
+		$("*").css("font-size", "80px");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<div id="d1">ID选择器</div>
+	<div class="c1">类选择器（div）</div>
+	<p class="c1">类选择器（p）</p>
+	<!-- javascript: 是一个伪协议，表示在触发<a>默认动作时，执行一段js代码
+		而javascript:; 表示什么都不执行，和javascript:void(0)是一样的 -->
+	<a href="javascript:;" onclick="f5();">点击</a>
+</body>
+</html>

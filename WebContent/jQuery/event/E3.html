@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件冒泡</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#a1").click(f1);
+		$("#d1").click(f2);
+	});
+	function f1(e) {
+		alert("一个链接");
+		//取消冒泡
+		e.stopPropagation();
+	}
+	function f2(e) {
+		alert("一个div");
+	}
+</script>
+</head>
+<body>
+	<div id="d1">
+		<a href="javascript:;" id="a1">点击</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>属性过滤</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.[attr] 具有这个属性的节点
+	function f1() {
+		$("div[id]").css("font-size", "60px");
+	}
+	//2.[attr=value] 属性值等于value的节点
+	function f2() {
+		$("div[id=d2]").css("color", "#FFB90F");
+	}
+	//3.[attr!=value] 属性值不等于value的节点
+	function f3() {
+		$("div[id!=d2]").css("color", "#4EEE94");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<div id="d1">具有id属性(d1)</div>
+	<div id="d2">具有id属性(d2)</div>
+	<div id="d3">具有id属性(d3)</div>
+	<a href="javascript:;" onclick="f1();">(d1,d2,d3)</a><br/>
+	<a href="javascript:;" onclick="f2();">(d2)</a><br/>
+	<a href="javascript:;" onclick="f3();">(d1,d3)</a>
+</body>
+</html>

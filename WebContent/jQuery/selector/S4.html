@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>内容过滤选择器</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.contains(text) 包含指定文本的节点
+	function f1() {
+		$("div:contains(指定)").css("font-size","60px");
+	}
+	//2.empty 空节点
+	function f2() {
+		$("div:empty").html("空节点");
+	}
+	//3.parent 不为空的节点
+	function f3() {
+		$("div:parent").html("不为空的节点");
+	}
+	//4.has(selector) 包含满足selector要求的节点的节点
+	function f4() {
+		$("div:has(p)").css("font-size","60px");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<div id="d1">被指定的文本</div>
+	<div></div>
+	<div>
+		<p>有p的节点</p>
+	</div>
+	<a href="javascript:;" onclick="f1()">指定文本</a>
+	<a href="javascript:;" onclick="f2()">空节点</a>
+	<a href="javascript:;" onclick="f3()">不为空的节点</a>
+	<a href="javascript:;" onclick="f4()">包含要求的节点</a>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>可见性过滤器</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.visible 可见的节点
+	function f1() {
+		$("div:visible").hide("slow");
+	}
+	//2.hidden 隐藏的节点
+	function f2() {
+		$("div:hidden").show("slow");
+	}
+</script>
+</head>
+<body>
+	<div>可见的节点</div>
+	<div style="display: none;">隐藏的节点</div>
+	<a href="javascript:;" onclick="f1()">隐藏</a>
+	<a href="javascript:;" onclick="f2()">可见</a>
+</body>
+</html>

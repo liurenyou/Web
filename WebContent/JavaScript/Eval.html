@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>计算器</title>
+<script type="text/javascript">
+	function cal() {
+		var input = document.getElementById("input").value;
+		var result = document.getElementById("result");
+		//使用try-catch避免输入的计算式出错
+		try {
+			/*
+				eval(string)函数可以计算字符串，并执行其中的js代码,并通
+				过计算后会返回结果，注意:如果转换对象是json对象时，为了
+				避免符号带来转换问题，一定要加括号:eval("("+data+")");
+			 */
+			result.innerHTML = eval(input);
+		} catch (e) {
+			result.innerHTML = "Error";
+		}
+	}
+</script>
+</head>
+<body>
+	<h3>计算器:</h3>
+	<input type="text" id="input">
+	<input type="button" value="计算" onclick="cal()">
+	<span id="result"></span>
+</body>
+</html>

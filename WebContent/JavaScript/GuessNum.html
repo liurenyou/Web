@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GuessNum</title>
+<script type="text/javascript">
+	//统计猜了多少次
+	var count = 0;
+	//在body加载前生成随机数
+	var answer = parseInt(Math.random() * 100)
+	console.log(answer);
+	//点击按钮时判断
+	function guessNum() {
+		//获取文本框的值
+		var num = document.getElementById("num").value;
+		//获取span
+		var span = document.getElementById("result");
+		//获取p
+		var hint = document.getElementById("hint");
+		//判断值是否是数字
+		if (isNaN(num) || num == "") {
+			span.innerHTML = "请输入数字";
+		} else {
+			if (answer == num) {
+				span.innerHTML = "恭喜猜对了!";
+			} else if (answer > num) {
+				span.innerHTML = "猜小了";
+				//每次猜错后自动清空输入框里的值
+				document.getElementById("num").value = "";
+				//猜错后次数增1
+				count = count + 1;
+				//游戏提示，提示第几次猜，都猜了哪些数字
+				hint.innerHTML = hint.innerHTML + "第" + count + "次" + "&nbsp"
+						+ "\"" + num + "\"" + "&nbsp" + "猜小了" + "<br>"
+			} else {
+				span.innerHTML = "猜大了";
+				document.getElementById("num").value = "";
+				count = count + 1;
+				hint.innerHTML = hint.innerHTML + "第" + count + "次" + "&nbsp"
+						+ "\"" + num + "\"" + "&nbsp" + "猜小了" + "<br>"
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>猜数字游戏</h1>
+	<p>数字范围"0-100"</p>
+	<input type="text" id="num">
+	<input type="button" value="猜" id="guess" onclick="guessNum()">
+	<span id="result"></span>
+	<p>提示:</p>
+	<p id="hint" style="overflow: auto; height: 200px;"></p>
+</body>
+</html>

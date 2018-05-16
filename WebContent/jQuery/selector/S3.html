@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>基本过滤选择器</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.first 第一个节点，last 最后一个节点
+	function f1() {
+		$("table tr:first").css("background-color","#cccccc");
+	}
+	//2.even 偶数节点，odd 奇数节点
+	function f2() {
+		$("tbody tr:even").css("background-color","#f0f0f0");
+	}
+	//3.eq(index) 等于index的节点，gt(index) 大于，lt(index) 小于
+	function f3() {
+		$("tbody tr:eq(0) td:eq(0)").css("background-color","#fff8dc");
+	}
+	//4.not(selector) 排除符合selector要求的节点
+	function f4() {
+		$("tbody tr:not(#tr1)").css("background-color","#fff8dc");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<table border="1" >
+		<thead>
+			<tr>
+				<td>姓名</td>
+				<td>薪水</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>甲</td>
+				<td>1000</td>
+			</tr>
+			<tr id="tr1">
+				<td>乙</td>
+				<td>2000</td>
+			</tr>
+			<tr>
+				<td>丁</td>
+				<td>3000</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="javascript:;" onclick="f1()">第一个节点</a>
+	<a href="javascript:;" onclick="f2()">偶数节点</a>
+	<a href="javascript:;" onclick="f3()">index节点</a>
+	<a href="javascript:;" onclick="f4()">排除后节点</a>
+</body>
+</html>

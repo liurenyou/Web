@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Option</title>
+<script type="text/javascript">
+	//不同省份的城市
+	var cities = [ 
+		[ '请选择' ], [ '石家庄', '唐山', '秦皇岛', '邯郸' ],
+		[ '太原', '大同', '临汾', '运城' ],
+		[ '沈阳', '大连', '鞍山', '葫芦岛' ],
+		[ '哈尔滨', '佳木斯', '牡丹江', '齐齐哈尔' ] 
+	];
+
+	//按照不同省份弹出不同城市的表单
+	function changeCities(list) {
+		/*
+		selectedIndex属性可以设置或者返回下拉列表中被选选
+		项的的索引号
+		 */
+		var index = list.selectedIndex;
+		console.log(index);
+		//找到城市
+		var city = cities[index];
+		console.log(city);
+		var c = document.getElementById("city");
+		//先清空城市列表
+		c.innerHTML = "";
+		//创建城市列表
+		for(var i=0;i<city.length;i++) {
+			//创建option
+			var opt = document.createElement('option');
+			//把value发送给客户端
+			opt.value = i;
+			//setAttribute('value',i);
+			opt.innerHTML = city[i];
+			//添加到城市列表中
+			c.appendChild(opt);
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>下拉菜单</h1>
+	省份
+	<!-- onchange事件会在域的内容改变时发生 -->
+	<select id="province" onchange="changeCities(this);">
+		<!-- value是定义送往服务器的选项值 -->
+		<option value="0">请选择</option>
+		<option value="1">河北</option>
+		<option value="2">山西</option>
+		<option value="3">辽宁</option>
+		<option value="4">吉林</option>
+	</select> 城市
+	<select id="city">
+		<option value="0">请选择</option>
+	</select>
+</body>
+</html>

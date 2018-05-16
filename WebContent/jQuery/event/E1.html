@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件绑定</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.绑定事件方式一
+	$(function() {
+		$("#d1").bind("click", function() {
+			$("#d1").css("color", "red");
+		});
+	});
+	//2.绑定事件方式二
+	$(function() {
+		$("#d2").click(function() {
+			$("#d2").css("color", "yellow");
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="d1">事件绑定1</div>
+	<div id="d2">事件绑定2</div>
+</body>
+</html>

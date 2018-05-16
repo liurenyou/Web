@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>子元素过滤</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//子元素过滤器 nth-child(index/even/odd)
+	//注意：子元素过滤器的下标从1开始
+	function f1() {
+		$("ul li:nth-child(1)").css("font-size","50px");
+	}
+	function f2() {
+		$("ul li:nth-child(2)").css("font-size","70px");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<a href="javascript:;" onclick="f1();">第一个</a>
+	<a href="javascript:;" onclick="f2();">第二个</a>
+</body>
+</html>

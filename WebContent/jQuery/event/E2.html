@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>获取事件对象</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#a1").click(f1);
+		$("#a2").click(f2);
+	});
+	//给事件函数传递一个参数则可以获取事件对象
+	function f1(e) {
+		//1 通过事件对象可以找到事件源
+		var obj = e.target;
+		console.log(obj);
+		$(obj).css("font-size","60px");
+	}
+	function f2(e) {
+		//2 获取鼠标点击的坐标
+		alert(e.pageX+" "+e.pageY);
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:;" id="a1">ClickMe</a><br/>
+	<a href="javascript:;" id="a2">ClickYou</a>	
+</body>
+</html>

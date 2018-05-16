@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML DOM</title>
+<script type="text/javascript">
+	//显示当前屏幕分辨率
+	function testWindow() {
+		var w = window.screen.width;
+		var h = window.screen.height;
+		console.log("Screen:"+w+"x"+h);
+	}
+	
+	//显示当前的地址栏URL信息
+	function showURL() {
+		var url = location.href;
+		console.log(url);
+	}
+	
+	//跳转到指定的网页
+	function openDoc() {
+		location.href = "http://www.baidu.com";
+	}
+	
+	//在js中检查当前的浏览器版本信息
+	function checkUserAgent() {
+		var ua = navigator.userAgent;
+		console.log(ua);
+		var chromeReg = /chrome/i;
+		if(chromeReg.test(ua)) {
+			console.log("谷歌浏览器");
+		}
+	}
+	
+	/*
+		confirm()方法用于显示一个带有指定消息和OK及取消按钮的对话框，
+		在调用confirm()时将暂停对js代码的执行，直到如果用户点击确认，
+		则会返回true，或者点击取消则会返回false，之后继续执行下一条语
+		句，注意:对话框按钮的文字不可改变
+	*/
+	function deleteObject() {
+		var del = confirm("是否确认删除？");
+		if(del) {
+			console.log("已删除");
+		} else {
+			console.log("已取消");
+		}
+		console.log("刚点击了一次删除按钮");
+	}
+</script>
+</head>
+<body>
+	<h1>Window Object</h1>
+	<div>
+		<input type="button" value="window" onclick="testWindow();">
+		<input type="button" value="showURL" onclick="showURL();">
+		<input type="button" value="openDoc" onclick="openDoc();">
+		<input type="button" value="checkUserAgent" onclick="checkUserAgent();">
+		<input type="button" value="delete" onclick="deleteObject();">
+		<!-- reload()方法:
+			1.如果该方法没有设定参数，或者参数为false，它会用HTTP头
+			If-Modified-Since来检测服务器上的文档是否发生改变，如
+			果文档发生了改变，reload()会再次下载该文档。如果文档未
+			发生改变，则该方法会从缓存中装载文档，与用户点击浏览器
+			刷新效果一样
+			2.如果该方法设定的参数为true，那么就会绕过缓存，直接从服
+			务器上重新下载该文档，与用户按住Shift刷新效果一样 -->
+		<input type="button" value="reload" onclick="location.reload();">
+		<!-- forward()方法:
+			加载历史列表中的下一个URL，back()方法是加载上一个 -->
+		<input type="button" value="forward" onclick="history.forward();">
+	</div>
+</body>
+</html>

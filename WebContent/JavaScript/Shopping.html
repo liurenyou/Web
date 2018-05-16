@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Shopping</title>
+<!-- 购物商城练习 -->
+<style type="text/css">
+body {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	width: 60%;
+	border: 2px solid #aaa;
+	border-collapse: collapse;
+}
+
+table th, table td {
+	border: 2px solid #aaa;
+	padding: 5px;
+}
+
+thead {
+	background-color: #eee;
+}
+</style>
+<script type="text/javascript">
+	//所有商城商品名class的值
+	var coms_className = [ 'com1', 'com2', 'com3', 'com4', 'com5' ];
+
+	//所有购物车商品名class的值
+	var carts_className = [ 'com1' ];
+
+	//为方便删除数组内的元素，给数组定义了一个函数，用于查找指定的元素在数组中的位置，即索引
+	Array.prototype.indexOf = function(val) {
+		for (var i = 0; i < this.length; i++) {
+			if (this[i] == val) {
+				return i;
+			}
+			return -1;
+		}
+	};
+	Array.prototype.remove = function(val) {
+		var index = this.indexOf(val);
+		if (index = -1) {
+			this.splice(index, 1);
+		}
+	};
+
+	//向购物车增加商品
+	function add_shoppingcart(btn) {
+		//传回参数为调用该方法的input表单对象
+		console.log(btn);
+		//获取当前点击商品的tr
+		var com_tr = btn.parentNode.parentNode;
+		console.log(com_tr);
+		//找到全部点击商品的td
+		var com_tds = com_tr.getElementsByTagName("td");
+		console.log(com_tds);
+		//获取点击商品的商品名
+		var name = com_tds[0].innerHTML;
+		console.log(name);
+		//获取点击商品的商品价格
+		var price = com_tds[1].innerHTML;
+		console.log(price);
+		//获取点击商品的库存
+		var repertory = com_tds[3];
+		console.log(repertory);
+		//获取点击商品名class的值
+		var com_className = com_tds[0].getAttribute("class");
+		console.log(com_className);
+
+		//将商品信息添加到购物车中
+		//如果商品重复
+		if (isInArray(carts_className, com_className)) {
+			//重复商品td
+			var rep = document.getElementsByClassName(com_className)[1];
+			console.log(rep);
+			//若库存数大于0增减1，否则将弹出"库存不足"并终止方法
+			if (repertory.innerHTML > 0) {
+				repertory.innerHTML = repertory.innerHTML - 1;
+			} else {
+				alert("库存不足");
+				return;
+			}
+			//获取重复添加商品tr
+			var cart_tr = rep.parentNode;
+			console.log(cart_tr);
+			var cart_tds = cart_tr.getElementsByTagName("td");
+			console.log(cart_tds);
+			//获取购买商品数量的文本域
+			var cart_number = cart_tds[2].getElementsByTagName("input")[1];
+			console.log(cart_number);
+			//购买数量增1
+			cart_number.value = +cart_number.value + 1;
+			//计算并更改总金额值
+			var count = cart_tds[3];
+			console.log(count);
+			count.innerHTML = com_tds[1].innerHTML * cart_number.value;
+
+			//若商品不重复
+		} else {
+			//向增加购物车增加新购买商品的tr
+			var new_tr = document.createElement("tr");
+			new_tr.innerHTML = '<td class="'+com_className+'">'
+					+ name
+					+ '</td>'
+					+ '<td>'
+					+ price
+					+ '</td>'
+					+ '<td class="symbol"><input type="button" value="-" onclick="input_mod(this);" /> <input '+
+				'type="text" size="3" readonly value="1" /> <input type="button"'
+					+ 'value="+" onclick="input_mod(this);" /></td>'
+					+ '<td>'
+					+ price
+					+ '</td><td><input type="button" value="x" onclick="del(this)"; /></td>';
+			//获取购物车
+			var cart = document.getElementById("goods");
+			console.log(cart);
+			cart.appendChild(new_tr);
+			//因1件商品添加入购物车，所以商城库存数减1
+			repertory.innerHTML = repertory.innerHTML - 1;
+			//将新添加入进购物车商品名的class值加入carts_className数组中
+			var cart_className = new_tr.getElementsByTagName("td")[0]
+					.getAttribute("class");
+			carts_className.push(cart_className);
+			console.log(carts_className);
+		}
+	};
+
+	//判断添加购物车是否重复
+	function isInArray(arr, value) {
+		for (var i = 0; i < carts_className.length; i++) {
+			if (value == carts_className[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//购物车"+"与"-"按钮方法，增加或减少购物车商品数量
+	function input_mod(btn) {
+		//获取购物车tr
+		var cart_tr = btn.parentNode.parentNode;
+		console.log(cart_tr);
+		//获取所有td
+		var cart_tds = cart_tr.getElementsByTagName("td");
+		console.log(cart_tds);
+		//获取购买商品数量的文本域
+		var number = cart_tds[2].getElementsByTagName("input")[1];
+		console.log(number);
+		//获取购物车商品名class的值
+		var cart_className = cart_tds[0].getAttribute("class");
+		//通过购物车class的值获取商品库存
+		var com = document.getElementsByClassName(cart_className)[0];
+		console.log(com);
+		//获取商城商品tr
+		var com_tr = com.parentNode;
+		console.log(com_tr);
+		//获取商品库存
+		var repertory = com_tr.getElementsByTagName("td")[3];
+		console.log(repertory);
+
+		//判断是"+"还是"-"
+		if (btn.value === "+") {
+			//判断库存是否充足
+			if (repertory.innerHTML < 1) {
+				alert("库存不足");
+				return;
+			} else {
+				//库存数减1
+				repertory.innerHTML = repertory.innerHTML - 1;
+			}
+			//商品数量增1
+			number.value = +number.value + 1;
+			console.log(repertory.innerHTML);
+		}
+		if (btn.value === "-") {
+			//若购买数量大于1则每次减少1，并且商品库存增加1，否则调用del(btn)来删除购物车对应商品
+			if (number.value > 1) {
+				//商品数量减1
+				number.value = number.value - 1;
+				repertory.innerHTML = +repertory.innerHTML + 1;
+			} else {
+				del(btn);
+			}
+		}
+		//计算并更改总金额值
+		var count = cart_tds[3];
+		console.log(count);
+		count.innerHTML = number.value * cart_tds[1].innerHTML;
+	}
+
+	//"x"按钮方法，删除购物车商品
+	function del(btn) {
+		//获取购物车tr
+		var cart_tr = btn.parentNode.parentNode;
+		console.log(cart_tr);
+		//获取所有td
+		var cart_tds = cart_tr.getElementsByTagName("td");
+		//获取购物车商品数量
+		var number = cart_tds[2].getElementsByTagName("input")[1].value;
+		console.log(number);
+		//获取购物车商品名class的值
+		var cart_className = cart_tds[0].getAttribute("class");
+		//获取商城的商品
+		var com = document.getElementsByClassName(cart_className)[0];
+		//获取对应商品库存
+		var repertory = com.parentNode.getElementsByTagName("td")[3];
+		console.log(repertory);
+		//购物车删掉的商品数量归还给商品库存
+		repertory.innerHTML = repertory.innerHTML * 1 + number * 1;
+		//删除对应的购物车商品tr
+		cart_tr.parentNode.removeChild(cart_tr);
+		//把购物车删除商品名class的值从carts_className数组中删除
+		carts_className.remove(cart_className);
+		console.log(carts_className);
+	}
+</script>
+</head>
+<body>
+	<!-- 商城 -->
+	<h1>巨划算</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>商品</th>
+				<th>单价(元)</th>
+				<th>颜色</th>
+				<th>库存</th>
+				<th>好评率</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="com1">罗技M185鼠标</td>
+				<td>80</td>
+				<td>黑色</td>
+				<td>893</td>
+				<td>98%</td>
+				<!-- 此处的参数this表示当前表单组件的DOM对象，也就是当前的input表单 -->
+				<td><input type="button" value="加入购物车"
+					onclick="add_shoppingcart(this);" /></td>
+			</tr>
+			<tr>
+				<td class="com2">微软X470键盘</td>
+				<td>150</td>
+				<td>黑色</td>
+				<td>9028</td>
+				<td>96%</td>
+				<td align="center"><input type="button" value="加入购物车"
+					onclick="add_shoppingcart(this);" /></td>
+			</tr>
+			<tr>
+				<td class="com3">洛克iphone6手机壳</td>
+				<td>60</td>
+				<td>透明</td>
+				<td>672</td>
+				<td>99%</td>
+				<td align="center"><input type="button" value="加入购物车"
+					onclick="add_shoppingcart(this);" /></td>
+			</tr>
+			<tr>
+				<td class="com4">蓝牙耳机</td>
+				<td>100</td>
+				<td>蓝色</td>
+				<td>8937</td>
+				<td>95%</td>
+				<td align="center"><input type="button" value="加入购物车"
+					onclick="add_shoppingcart(this);" /></td>
+			</tr>
+			<tr>
+				<td class="com5">金士顿U盘</td>
+				<td>70</td>
+				<td>红色</td>
+				<td>4</td>
+				<td>100%</td>
+				<td align="center"><input type="button" value="加入购物车"
+					onclick="add_shoppingcart(this);" /></td>
+			</tr>
+	</table>
+
+	<!-- 购物车 -->
+	<h1>购物车</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>商品</th>
+				<th>单价(元)</th>
+				<th>数量</th>
+				<th>金额(元)</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<tbody id="goods">
+			<tr>
+				<td class="com1">罗技M185鼠标</td>
+				<td>80</td>
+				<td><input type="button" value="-" onclick="input_mod(this);" />
+					<input type="text" size="3" readonly value="1" /> <input
+					type="button" value="+" onclick="input_mod(this);" /></td>
+				<td>80</td>
+				<td align="center"><input type="button" value="x"
+					onclick="del(this);" /></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

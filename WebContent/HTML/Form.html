@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表单</title>
+</head>
+<body>
+	<!-- 表单元素:
+		用来划分一个范围，在此范围内的控件中的
+		数据才能提交给服务器 -->
+	<!-- action属性，声明表单数据提交的目标 -->
+	<form action="http://www.baidu.com">
+		<!-- 文本框
+			value:设置默认值
+			maxlength:限制输入长度
+			readonly:设置只读 -->
+		<p>
+			<input type="text" value="admin" maxlength="10" readonly>
+		</p>
+		<!-- 密码框，输入时不会显示内容 -->
+		<p>
+			<input type="password">
+		</p>
+		<!-- 单选框
+			name:组名，同一组radio彼此排斥
+			checked:设置默认选中
+			value: -->
+		<p>
+			<input type="radio" name="sex" checked>男
+			<input type="radio" name="sex">女
+		</p>
+		<!-- 多选框 -->
+		<p>
+			<input type="checkbox" checked>音乐
+			<input type="checkbox">看电影
+			<input type="checkbox">旅游
+		</p>
+		<!-- 添加文件框 -->
+		<p>
+			照片<input type="file">
+		</p>
+		<!-- 隐藏框
+			用来向服务器传递用户没必要看到的数据 -->
+		<p>
+			<input type="hidden" value="123">
+		</p>
+		<!-- 按钮
+			submit:用来提交表单
+			reset:用来重置表单内的数据
+			button:暂无功能，js可以为它制定功能
+			value:为按钮命名 -->
+		<p>
+			<input type="submit" value="注册">
+			<input type="reset" value="重置">
+			<input type="button" value="测试">
+		</p>
+		<!-- 标记
+			可以将文件与某个控件绑到一起，增加控件的
+			点击面积 -->
+		<p>
+			<input type="checkbox" id="1">
+			<label for="1">我已阅读并自愿遵守此协议</label>
+		</p>
+		<!-- 下拉选项
+			selected:默认选中 -->
+		<p>
+			家乡:
+			<select>
+				<option selected="selected">请选择</option>
+				<option>北京</option>
+				<option>上海</option>
+				<option>广州</option>
+				<option>深圳</option>
+			</select>
+		</p>
+		<!-- 文本域
+			可以输入多换文本
+			rows:设置高度
+			cols:设置宽度
+			标签中的内容是默认内容 -->
+		<p>
+			<textarea rows="10" cols="20">请输入</textarea>
+		</p>
+	</form>
+</body>
+</html>

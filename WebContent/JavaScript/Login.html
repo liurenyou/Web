@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	//检查账号是否正确
+	function checkName() {
+		console.log(1);
+		//"\w"代表数字、大小写字母、汉字与下划线，"^n"/"n$"是以n开头/以n结尾
+		//"n{5,10}"表示包含5-10个n
+		var reg = /^\w{5,10}$/;
+		var name = document.getElementById("name").value;
+		var span = document.getElementById("name_msg");
+		if (reg.test(name)) {
+			//格式正确
+			span.style.color = "green";
+			span.innerHTML = "格式正确";
+			return true;
+		} else {
+			//格式错误
+			span.style.color = "red";
+			span.innerHTML = "请输入5-10位字母、数字、下划线";
+			return false;
+		}
+	}
+
+	//假设的正确密码
+	var correct = "123456"
+	console.log("密码:" + 123456)
+	//检验密码是否正确
+	function checkPwd() {
+		var pwd = document.getElementById("pwd").value;
+		if (pwd == correct) {
+			return true;
+		} else {
+			alert("密码错误");
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+	<!-- js在事件调用函数时用return返回值实际上是对windows.event.returnvalue
+		进行设置，而该值决定当前操作是否执行，true时继续操作，false则中断操作 -->
+	<form action="http://www.baidu.com"
+		onsubmit="return checkName()+checkPwd()==2;">
+		<p>账号</p>
+		<input type="text" id="name" onblur="checkName();"> <span
+			id="name_msg"></span>
+		<p>密码</p>
+		<input type="password" id="pwd">
+		<p>
+			<input type="submit" value="登录">
+		</p>
+	</form>
+</body>
+</html>

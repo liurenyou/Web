@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Size</title>
+<style type="text/css">
+/*单个边设置边框
+	left/rigth/top/bottom */
+h1 {
+	border-left: 20px solid black;
+}
+
+/*四个边一起设置边框*/
+p {
+	border: 10px solid red;
+}
+
+/*内容可能会溢出
+	默认情况下不会溢出，因为p的高度有自适应，
+	只有设定宽高后才会溢出，溢出后使用
+	overflow属性处理*/
+p {
+	width: 80px;
+	height: 70px;
+	overflow: auto;
+}
+
+div {
+	width: 100px;
+	height: 100px;
+	border: 1px solid red;
+}
+
+/*四个边设置相同的边距*/
+#d0 {
+	padding: 30px;
+	margin: 40px;	
+}
+
+/*四个边设置不同的边距(以上为起点顺时针)
+	注:垂直方向外边距有折叠现象*/
+#d1 {
+	padding: 10px 20px 30px 40px;
+	margin: 10px 20px 30px 40px;
+}
+
+/*单个边设置边距*/
+#d2 {
+	padding-left: 50px;
+	margin-top: 50px;
+}
+
+/*对边设置相同边距(上下，左右)*/
+#d3 {
+	padding: 20px 30px;
+	margin: 20px 30px;
+}
+
+/*外边距可以使用auto居中，文本居中使用center*/
+#d4 {
+	margin: auto;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+	<h1>咏鹅</h1>
+	<p>鹅鹅鹅， 曲项向天歌。 白毛浮绿水， 红掌拨清波。</p>
+	<div id="d0">d0</div>
+	<div id="d1">d1</div>
+	<div id="d2">d2</div>
+	<div id="d3">d3</div>
+	<div id="d4">d4</div>
+</body>
+</html>

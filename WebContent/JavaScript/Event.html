@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM事件</title>
+<script type="text/javascript">
+	//1 事件绑定
+	//1.1 动态绑定，该绑定必须在页面加载后执行，才能找到按钮对象，才能正确绑定事件
+	//利用window.onload事件，在页面加载后执行初始化代码
+	window.onload = init; //注意，init是方法的引用变量
+	function init() {
+		var btn = document.getElementById("btn");
+		btn.onclick = function() {
+			console.log("Hello" + this.value);
+		};
+	};
+	//1.2 属性绑定
+	function show() {
+		console.log(this);
+	};
+	//2 事件对象，事件发生后，事件的相关信息都会保存到event对象中,为了避免兼容性问题，IE浏览器的event
+	//对象是window的属性，而Firefox浏览器则是事件方法的参数
+	function func(event) {
+		console.log(event.clientX + "," + event.clientY);
+		var obj = event.target || event.srcElement;
+		console.log(obj);
+	}
+	window.onload = function() {
+		var div = document.getElementById("demo");
+		div.onclick = function(event) {
+			console.log(event.clientX + "," + event.clientY);
+			var obj = event.target || event.scrElement;
+			console.log(obj);
+		};
+	};
+	/*3 DOM同时两种事件模型：冒泡事件和捕获型事件，事件发生时，浏览器会将发生事件的情况封装到event对象中，
+		如果需要获取事件相关的事件，则需要调用次对象方法的属性或方法
+	  3.1 冒泡型事件：事件按照从特定的事件目标到最不特定的事件目标的顺序触发，触发顺序是：div、body、html、
+		document、window，在外部检查事件，可以监听一组元素是否发生了相应的事件
+	  3.2 阻止事件的传播，控制事件可传播的范围
+	*/
+	function stop(e) {
+		console.log("stop");
+		if(e.stopPropagation) {
+			e.stopPropagation();
+		}else {
+			e.cancelBubble = true;
+		}
+	}
+</script>
+</head>
+<body>
+	<!-- 事件绑定 -->
+	<!-- 1.可以利用JS动态绑定事件 -->
+	<input type="button" value="动态绑定" id="btn" />
+	<!-- 2.HTML中也可以利用属性绑定JS事件 -->
+	<div onclick="show();">
+		<input type="button" value="属性绑定" onclick="show();" />
+	</div>
+	<div onclick="func(event);">鼠标</div>
+	<div id="demo">Demo</div>
+	<!-- 冒泡事件 -->
+	<div onclick="console.log('div');">
+		div元素
+		<p onclick="console.log('p');">
+			p元素
+			<input type="button" value="冒泡" onclick="console.log('btn');">
+		</p>
+		<p onclick="stop(event);">
+			<input type="button" value="被阻止的冒泡" onclick="console.log('btn');">
+		</p>
+	</div>
+</body>
+</html>

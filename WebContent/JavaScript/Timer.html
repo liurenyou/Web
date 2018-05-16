@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Timer</title>
+<script type="text/javascript">
+	/*
+		setInterval(code,millisec)方法:
+		可以按照指定的周期来调用函数或计算表达式，直到clearInterval()
+		被调用或窗口被关闭，setInterval()返回的ID值可用作clearInterval()
+		方法的参数
+	 */
+	//id是用来存储setInterval的返回值
+	var id = 0;
+	//记录数据次数
+	var count = 0;
+	//多功能的开关
+	var flag = 0;
+	//时、分、秒、毫秒
+	var hour = 0;
+	var min = 0;
+	var sec = 0;
+	var mil = 0;
+
+	var str_hour = "";
+	var str_min = "";
+	var str_sec = "";
+	var str_mil = "";
+
+	var double_digit = /^\d{2}$/;
+	var three_digit = /^\d{3}$/;
+	//开始计时器
+	function startTimer() {
+		/*
+			第一次点击start开始计时，再次点击start计时重置，并显示数据，
+			自动继续新的计时，直到点击stop停止计时
+		 */
+		if (flag != 1) {
+			//其中周期是以毫秒为单位
+			id = setInterval(run, 100);
+			//为避免同时开启多个setInterval(),每次关闭前一个
+			clearInterval(id - 1);
+			//console.log(id);
+			var timer = document.getElementById("timer");
+			var show = document.getElementById("show");
+			//记录点击数
+			count += 1;
+			//第一次点击不记录
+			if (count > 1) {
+				show.innerHTML = show.innerHTML + "第" + (count - 1) + "次"
+						+ "&nbsp" + timer.innerHTML + "</br>";
+				//刷新计时
+				mil = sec = sec = hour = 0;
+			}
+
+			//恢复计时
+		} else {
+			id = setInterval(run, 100);
+			//重置开关，成为暂停条件
+			flag = 0;
+		}
+	}
+
+	//反复被调用的方法
+	function run() {
+		mil += 100;
+		if (mil >= 1000) {
+			mil = 0;
+			sec += 1;
+		}
+		if (sec >= 60) {
+			sec = 0;
+			min += 1;
+
+		}
+		if (min >= 60) {
+			min = 0;
+			hour += 1;
+		}
+
+		//为美化统一输出，数字位数不够时在数字前加"0"
+		str_mil = mil.toString();
+		str_sec = sec.toString();
+		str_min = min.toString();
+		str_hour = hour.toString();
+
+		if (str_mil.length < 3) {
+			str_mil = "00" + mil;
+		}
+		if (str_sec.length < 2) {
+			str_sec = "0" + sec;
+		}
+		if (str_min.length < 2) {
+			str_min = "0" + min;
+		}
+		if (str_hour.length < 2) {
+			str_hour = "0" + hour;
+		}
+		timer.innerHTML = str_hour + "时" + str_min + "分" + str_sec + "秒"
+				+ str_mil + "毫秒";
+	}
+
+	//结束计时
+	function stopTimer() {
+		//暂停功能
+		clearInterval(id);
+		//开关从0自增到1，成为恢复计时条件
+		flag += 1;
+		//连续点击stop时开关自增大于1，刷新页面重置计时器
+		if (flag > 1) {
+			location.reload();
+		}
+	}
+
+	
+	//钟表显示间隔定时器id
+	var id2 = 0;
+	//钟表消失一次性定时器id
+	var id3 = [];
+	//钟表多次点击开关
+	var flag2 = 0;
+	
+	//点击出现现在时间，5s后消失
+	function showTime() {
+		flag2 = flag2 + 1;
+		if (flag2 == 1) {
+			var once = document.getElementById("once");
+			//设置间隔执行定时器
+			id2 = setInterval(clock, 100);
+
+			/*
+				执行一次的定时器
+				多用于处理延迟功能 id = setTimeout(函数,延迟时间);
+				注:若其中的函数再次调用setTimeout()则可以实现
+				setInterval()效果，此时需要返回值使用clearTimeout()
+				来结束函数的执行
+			 */
+			//设置一次性定时器			
+			id3[id3.length] = setTimeout(timeStop, 5000);	
+		//多次点击直接取消时间显示
+		} if (flag2>1) {
+			timeStop();
+			for(var i=0;i<id3.length;i++) {
+				clearTimeout(id3[i]);
+			}
+		}
+	}
+
+	//转换时间格式并输出进once中
+	function clock() {
+		var now = new Date();
+		var str = now.toLocaleTimeString();
+		once.innerHTML = str;
+	}
+
+	//结束时间的输出，并删除span中的内容
+	function timeStop() {
+		clearInterval(id2);
+		flag2 = 0;
+		once.innerHTML = "";
+	}
+</script>
+<style type="text/css">
+body {
+	text-align: center;
+}
+
+#once {
+	margin: 3px;
+	/*阴影*/
+	box-shadow: 3px 3px 6px blue;
+	/*圆角*/
+	border-radius: 10px;
+}
+
+#show {
+	letter-spacing: 2px;
+}
+
+#timer {
+	letter-spacing: 4px;
+}
+</style>
+</head>
+<body>
+	<h1>计时器</h1>
+	<p>
+		<span id="timer">00时00分00秒000毫秒</span>
+	</p>
+	<input type="button" value="start" onclick="startTimer();">
+	<input type="button" value="stop" onclick="stopTimer();">
+	<input type="button" value="time" onclick="showTime();">
+	<p>
+		<span id="once"></span>
+	</p>
+	<p>
+		<span id="show"></span>
+	</p>
+</body>
+</html>

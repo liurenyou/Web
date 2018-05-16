@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>自定义动画</title>
+<style type="text/css">
+img {
+	position: relative;
+}
+
+#d1 {
+	width: 200px;
+	height: 100px;
+	border: 1px solid red;
+	position: fixed;
+	top: 100px;
+	right: -180px;
+}
+</style>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//显示
+	function f1() {
+		$("img").show(3000);
+	}
+	//隐藏
+	function f2() {
+		//显示与隐藏动画的本质就是采用定时器，在一定时间内修改元素的透明度
+		//第二个参数是回调函数，动画完成后由jQuery自动调用的函数
+		$("img").hide(3000, function() {
+			console.log("回调函数");
+		});
+	}
+	//消息提示效果
+	function f3() {
+		$("p[style]").fadeIn(500).fadeOut(3000);
+	}
+	//自定义动画 基于位移，即它采用定时器，在一定时间内不断修改元素的
+	//偏移量，使其运动起来
+	function f4() {
+		$("img").animate({
+			"left" : "300px"
+		}, 3000).animate({
+			"top" : "300px"
+		}, 3000).animate({
+			"left" : "0"
+		}, 3000).animate({
+			"top" : "0"
+		}, 3000);
+	}
+	//自动伸缩侧功能框
+	$(function() {
+		$("#d1").hover(function() {
+			$(this).animate({
+				"right" : "0"
+			}, 500);
+		}, function() {
+			$(this).animate({
+				"right" : "-180px"
+			}, 500);
+		});
+	});
+</script>
+</head>
+<body>
+	<p>
+		<input type="button" value="显示" onclick="f1();"> <input
+			type="button" value="隐藏" onclick="f2();"> <input
+			type="button" value="删除" onclick="f3();"> <input
+			type="button" value="动画" onclick="f4();">
+	</p>
+	<p>
+		<img alt="图片无法显示" src="../../HTML/01.jpg">
+	</p>
+	<p style="display: none;">动画结束！</p>
+	<div id="d1"></div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>遍历练习</title>
+<style type="text/css">
+.selected {
+	background: yellow;
+}
+</style>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	/*要求点击哪一行，哪一行背景色变黄，并且选中该行单选框*/
+	$(function() {
+		$("tbody tr").click(function() {
+			$(this).addClass("selected").siblings().removeClass("selected");
+			$(this).find(":radio").attr("checked",true);
+		});
+	});
+</script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td></td>
+				<td>姓名</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="radio" name="a"></td><td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="a"></td><td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="a"></td><td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="a"></td><td>马六</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

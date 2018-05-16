@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic</title>
+<script type="text/javascript">
+	/*1.函数内的js在点击按钮时执行，而此时页面早已
+	  加载完成，所以函数内的js执行时机比body晚
+	  2.函数外的js在页面加载时立刻执行，它的执行时
+	  机比body早	
+	 */
+	//alert(1);
+	console.log("控制台打印");
+
+	/*声明变量
+		1.js中的变量不区分类型
+		2.js中的变量默认值是undefined
+	 */
+	var x;
+	console.log(x);
+	x = 5;
+	console.log(x);
+	var y = 6;
+	console.log(y);
+
+	/*数据类型
+		1.声明变量，给它们赋予不同类型的值
+	 */
+	var s = "hello";
+	var n = 3.14;
+	var b = true;
+	var b2 = false;
+	console.log(s);
+	console.log(n);
+	console.log(b);
+	console.log(b2);
+	//2.运算时不同类型的数据会进行隐士转换
+	console.log(s + n); //hello3.14
+	console.log(s + b); //hellotrue
+	console.log(n + b); //4.140000000000001
+	console.log(b + b); //2
+	console.log(b + b2); //1
+	console.log(parseInt("5.6") + 1); //6
+	console.log(parseFloat("5.6") + 1); //6.6
+	console.log(parseInt("abc")); //NaN
+	console.log(typeof (s)); //string
+	//若传入的数据无法转为数字，那么它是NaN
+	console.log(isNaN("abc")); //ture
+	//若传入的数据可以转为数字，就不是NaN
+	console.log(isNaN("123")); //false
+	//3.运算符
+	console.log("1" == 1); //true
+	console.log("1" === 1); //false
+	/*4.条件表达式
+		js中可以将非布尔值做条件，所有空值都
+		等价于false，所有非空值都等价于true
+		空值:0,"",null,NaN,undefined,这样
+		的做法是为了简化代码
+	 */
+	var k = "abc";
+	if (k != 0 && k != "" && k != null && k != NaN && k != undefined) {
+		console.log("ok");
+	};
+	if (k) {
+		console.log("ok");
+	}
+	k && console.log("ok");
+
+	//计算输入值的平方
+	function pf() {
+		//获取文本框
+		var input = document.getElementById("t");
+		//打桩，方便检查错误
+		console.log(input);
+		//从框中取值
+		var n = input.value;
+		console.log(n);
+		var span = document.getElementById("result");
+		console.log(span);
+		//判断该值是否为数字
+		if (isNaN(n)) {
+			//不是数字
+			span.innerHTML = "请输入数字";
+		} else {
+			//是数字
+			span.innerHTML = n * n;
+		}
+	}
+</script>
+</head>
+<body>
+	<p>js是解释型语言</p>
+	<p>请输入数字</p>
+	<input type="text" id="t">
+	<input type="button" value="平方" onclick="pf()"> =
+	<span id="result"></span>
+</body>
+</html>

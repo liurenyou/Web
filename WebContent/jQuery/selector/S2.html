@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>层次选择器</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.查找所有后代节点
+	function f1() {
+		$("#d1 div").css("font-size", "70px");
+	}
+	//2.查找所有子节点
+	function f2() {
+		$("#d1>div").css("font-size", "70px");
+	}
+	//3.查找下一个兄弟
+	function f3() {
+		$("#d3+div").css("font-size", "70px");
+	}
+	//4.查找下面所有兄弟
+	function f4() {
+		$("#d3~div").css("font-size", "70px");
+	}
+</script>
+</head>
+<body style="font-size: 30px;">
+	<div id="d1">
+		<div id="d2">d2</div>
+		<div id="d3">
+			<div id="d4" style="font-size: 40px;">d4</div>
+		</div>
+		<div id="d5">d5</div>
+		<p>p</p>
+	</div>
+	<a href="javascript:;" onclick="f1()">所有后代节点</a>
+	<a href="javascript:;" onclick="f2()">所有子节点</a>
+	<a href="javascript:;" onclick="f3()">下一个兄弟</a>
+	<a href="javascript:;" onclick="f4()">下面所有兄弟</a>
+</body>
+</html>

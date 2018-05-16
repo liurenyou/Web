@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM操作</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.获取html内容与文本内容
+	function f1() {
+		//alert($("#d1").html());
+		alert($("#d1").text());
+	}
+	//2.修改或添加html内容
+	function f2() {
+		$("#d1").html("修改html内容");
+	}
+	//3.获取value
+	function f3() {
+		alert($(":text").val());
+	}
+	//4.修改或添加value
+	function f4() {
+		$(":text").val("修改内容");
+	}
+	//5.获取属性
+	function f5() {
+		alert($("#d1").attr("id"));
+	}
+	//6.修改或添加属性
+	function f6() {
+		$("#d1").attr("style","font-size:50px;").attr("class","c1");
+		//也可以简化成 $().attr({"A":"a","B":"b"});
+		console.log($("#d1"));
+	}
+</script>
+</head>
+<body>
+	<div id="d1" style="font-size: 30px;">登录</div>
+	姓名:<input name="uname"><br/>
+	<a href="javascript:;" onclick="f1();">获取文本内容</a>
+	<a href="javascript:;" onclick="f2();">修改html</a>
+	<a href="javascript:;" onclick="f3();">获取value</a>
+	<a href="javascript:;" onclick="f4();">修改value</a>
+	<a href="javascript:;" onclick="f5();">获取属性</a>
+	<a href="javascript:;" onclick="f6();">修改属性</a>
+</body>
+</html>

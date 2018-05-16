@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM操作</title>
+<script type="text/javascript"src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	function f1() {
+		//1.创建新节点
+		var $obj = $("<h1>h1</h1>");
+		//1.1添加子节点在最后
+		$("body").append($obj);
+	}
+	function f2() {
+		//便捷创建节点
+		$("body").append("<h2>h2</h2>");
+	}
+	function f3() {
+		//1.2添加子节点在首位
+		$("body").prepend("<h3>h3</h3>");
+	}
+	function f4() {
+		//1.3在上一位添加一个兄弟节点
+		$("h1").before("<h4>h4</h4>");
+		//1.4在下一位添加一个兄弟节点
+		$("h1").after("<h5>h5</h5>");
+	}
+	
+</script>
+</head>
+<body>
+	<a href="javascript:;" onclick="f1();f2();">创建节点(append)</a>
+	<a href="javascript:;" onclick="f3();">创建节点(prepend)</a>
+	<a href="javascript:;" onclick="f4();">创建节点(before/after)</a>
+</body>
+</html>

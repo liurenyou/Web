@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM操作</title>
+<style type="text/css">
+.s1 {
+	font-size: 80px;
+}
+.s2 {
+	background: red;
+}
+</style>
+<script type="text/javascript"src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.css() 直接修改样式属性
+	function f1() {
+		$("#d1").css({"font-size":"60px","color":"red"});
+	}
+	//2.addClass() 添加一个或多个类
+	function f2() {
+		$("#d1").addClass("s1 s2");
+	}
+	//3.removeClass(class) 删除某个类，若没有参数则删除所有类
+	function f3() {
+		$("#d1").removeClass("s1");
+	}
+	function f4() {
+		$("#d1").removeClass();
+	}
+	//4.toggleClass() 样式的切换，当做一个开关，初始与括号内切换
+	function f5() {
+		$("#d1").toggleClass("s1");
+	}
+	//5.hasClass() 判断节点有没有某个样式，有则返回true，没有返回false
+	function f6() {
+		if($("#d1").hasClass("s1")) {
+			$("#d1").removeClass("s1");
+		}
+	}
+	
+</script>
+</head>
+<body>
+	<div id="d1">内容</div>
+	<a href="javascript:;" onclick="f1();">变换字体</a>
+	<a href="javascript:;" onclick="f2();">增加两个类</a>
+	<a href="javascript:;" onclick="f3();">删除s1</a>
+	<a href="javascript:;" onclick="f4();">全部删除</a>
+	<a href="javascript:;" onclick="f5();">切换</a>
+	<a href="javascript:;" onclick="f6();">判断</a>
+</body>
+</html>

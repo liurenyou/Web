@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>自定义对象</title>
+<script type="text/javascript" src="js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//1.采用直接量的方式创建对象(json),建议在创建的对象没有函数时使用
+	function f1() {
+		//创建对象
+		var zs = {
+			"name" : "zhangsan",
+			"age" : 20,
+			"job" : function() {
+				alert("学生");
+			}
+		};
+		alert(zs.name);
+		alert(zs.age);
+		zs.job();
+	}
+	//2.采用内置构造器创建自定义对象，建议在创建的对象有函数时使用
+	function f2() {
+		//创建对象
+		var ls = new Object();
+		ls.name = "lisi";
+		ls.age = 21;
+		ls.job = function() {
+			alert("学生");
+		}
+		alert(ls.name);
+		alert(ls.age);
+		ls.job();
+	}
+	//3.采用自定义构造器自定义对象，建议在创建的对象是给别人用时使用
+	function Custom(name, age, job) {
+		/*将传入的数据存入此对象*/
+		this.name = name;
+		this.age = age;
+		this.job = job;
+	}
+	function f3() {
+		//创建对象
+		var ww = new Custom("wangwu", 30, function() {
+			alert("老师");
+		});
+		alert(ww.name);
+		alert(ww.age);
+		ww.job();
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="张三" onclick="f1();">
+	<input type="button" value="李四" onclick="f2();">
+	<input type="button" value="王五" onclick="f3();">
+</body>
+</html>

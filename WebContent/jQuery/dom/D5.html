@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM操作</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	//预加载点击数字2变大函数
+	$(function() {
+		$("li:eq(1)").click(function() {
+			$(this).css("font-size", "40px");
+		});
+	});
+	function f1() {
+		//1.简单拷贝
+		var li = $("ul li:eq(1)").clone();
+		$("ul").append(li);
+	}
+	function f2() {
+		//2.复杂拷贝，将事件处理代码一块复制
+		var li = $("ul li:eq(1)").clone(true);
+		$("ul").append(li);
+	}
+</script>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<a href="javascript:;" onclick="f1();">简单拷贝</a>
+	<a href="javascript:;" onclick="f2();">复制拷贝</a>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>合成事件</title>
+<script type="text/javascript" src="../js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#d1").toggle(f1,f2);
+	});
+	function f1() {
+		$("#d2").show("slow");
+	}
+	function f2() {
+		$("#d2").hide("slow");
+	}
+</script>
+</head>
+<body>
+	<div id="d1">玩会儿捉迷藏吧！</div>
+	<div id="d2" style="display: none;">我出来了！</div>
+</body>
+</html>
